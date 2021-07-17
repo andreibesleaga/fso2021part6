@@ -19,16 +19,18 @@ const notificationReducer = (state = initialState, action) => {
 
 export const notify = (notification, seconds) => {
     return async dispatch => {
+        // clear any prior notifications timeouts
+        var highestTimeoutId = setTimeout(";");
+        for (var i = 0 ; i < highestTimeoutId ; i++) {
+            clearTimeout(i); 
+        }
+        // setTimeout to hide notification after seconds
         setTimeout(() => {dispatch(hideNotify())}, seconds * 1000)
         dispatch({
           type: 'SHOW',
           data: notification,
         })
     }    
-    return {
-      type: 'SHOW',
-      data: notification
-    }
 }
   
 export const hideNotify = () => {
